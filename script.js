@@ -3,35 +3,34 @@
 // in the html.
 $(function () {
 	var currentHour = dayjs().hour();
-  var saveBtn = $(".saveBtn");
-  saveBtn.on("click", saveEntry)
+	var saveBtn = $(".saveBtn");
+	saveBtn.on("click", saveEntry);
 
-  function saveEntry(event){
-    var currentBtn = $(event.target);
-    var textArea = currentBtn.siblings("textarea");
-   
-    var parentID = currentBtn.parent().attr("id")
-    console.log(parentID, textArea.val())
-    localStorage.setItem(parentID, textArea.val())
-  }
+	function saveEntry(event) {
+		var currentBtn = $(event.target);
+		var textArea = currentBtn.siblings("textarea");
+
+		var parentID = currentBtn.parent().attr("id");
+		console.log(parentID, textArea.val());
+		localStorage.setItem(parentID, textArea.val());
+	}
 
 	for (let i = 9; i < 18; i++) {
 		var parentId = $("#hour-" + i);
 		var textArea = parentId.children("textarea");
-    var event = localStorage.getItem("hour-" + i)
-    textArea.val(event)
+		var event = localStorage.getItem("hour-" + i);
+		textArea.val(event);
 		if (currentHour === i) {
 			console.log(currentHour, i);
 			textArea.addClass("present");
-		};
-    if (currentHour > i) {
-      textArea.addClass("past");
-    }
-    if (currentHour < i) {
-      textArea.addClass("future");
-    };
-	};
-
+		}
+		if (currentHour > i) {
+			textArea.addClass("past");
+		}
+		if (currentHour < i) {
+			textArea.addClass("future");
+		}
+	}
 
 	// TODO: Add a listener for click events on the save button. This code should
 	// use the id in the containing time-block as a key to save the user input in
